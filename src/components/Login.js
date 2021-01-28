@@ -3,11 +3,10 @@ import { Form, Button, Card, Alert } from 'react-bootstrap'
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
 
-export default function Signup() {
+export default function Login() {
     const emailRef = useRef()
     const passwordRef = useRef()
-    const passwordConfirmRef = useRef()
-    const { signup } = useAuth()
+    const { login } = useAuth()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const history = useHistory()
@@ -15,17 +14,13 @@ export default function Signup() {
     async function handleSubmit(e) {
         e.preventDefault()
 
-        if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-            return setError('Mật khẩu không trùng khớp !')
-        }
-
         try {
             setError('')
             setLoading(true)
-            await signup(emailRef.current.value, passwordRef.current.value)
+            await login(emailRef.current.value, passwordRef.current.value)
             history.push('/')
         } catch {
-            setError('Đăng ký tài khoản không thành công !')
+            setError('Đăng nhập thất bại !')
         }
 
         setLoading(false)
@@ -35,7 +30,7 @@ export default function Signup() {
         <>
             <Card>
                 <Card.Body>
-                    <h2 className="text-center mb-4">ĐĂNG KÝ</h2>
+                    <h2 className="text-center mb-4">ĐĂNG NHẬP</h2>
                     {error && <Alert variant="danger">{error}</Alert>}
                     <Form onSubmit={handleSubmit}>
                         <Form.Group id="email">
@@ -46,16 +41,12 @@ export default function Signup() {
                             <Form.Label>Mật khẩu</Form.Label>
                             <Form.Control type="password" ref={passwordRef} required></Form.Control>
                         </Form.Group>
-                        <Form.Group id="password-confirm">
-                            <Form.Label>Nhập lại mật khẩu</Form.Label>
-                            <Form.Control type="password" ref={passwordConfirmRef} required></Form.Control>
-                        </Form.Group>
-                        <Button disabled={loading} className="w-100" type="submit">Đăng ký</Button>
+                        <Button disabled={loading} className="w-100" type="submit">Đăng nhập</Button>
                     </Form>
                 </Card.Body>
             </Card>
             <div className="w-100 text-center mt-2">
-                Bạn đã có tài khoản ? <Link to="/login">Đăng Nhập</Link>
+                Bạn chưa có tài khoản ? <Link to="/signup">Đăng ký</Link>
             </div>
         </>
     )
