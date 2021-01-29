@@ -20,7 +20,7 @@ export default function Login() {
             await login(emailRef.current.value, passwordRef.current.value)
             history.push('/')
         } catch {
-            setError('Đăng nhập thất bại !')
+            setError('Đăng nhập thất bại, sai tài khoản hoặc mật khẩu !')
         }
 
         setLoading(false)
