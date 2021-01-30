@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react'
 import { Form, Button, Card, Alert } from 'react-bootstrap'
-import { useAuth } from '../contexts/AuthContext'
+import { useAuth } from '../../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
+import CenteredContainer from './CenteredContainer'
 
 export default function UpdateProfile() {
     const emailRef = useRef()
@@ -33,7 +34,7 @@ export default function UpdateProfile() {
 
         Promise.all(promises)
             .then(() => {
-                history.push('/')
+                history.push('/user')
             })
             .catch(() => {
                 setError('Cập nhật thất bại !')
@@ -44,7 +45,7 @@ export default function UpdateProfile() {
     }
 
     return (
-        <>
+        <CenteredContainer>
             <Card>
                 <Card.Body>
                     <h2 className="text-center mb-4">CẬP NHẬT HỒ SƠ</h2>
@@ -67,8 +68,8 @@ export default function UpdateProfile() {
                 </Card.Body>
             </Card>
             <div className="w-100 text-center mt-2">
-                <Link to="/">Hủy</Link>
+                <Link to="/user">Hủy</Link>
             </div>
-        </>
+        </CenteredContainer>
     )
 }
