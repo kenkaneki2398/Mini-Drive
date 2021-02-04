@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Button } from 'react-bootstrap'
+import { Button, Image } from 'react-bootstrap'
+import folderIcon from '../../images/folder.png'
 
 export default function Folder({ folder }) {
     return (
@@ -13,6 +14,7 @@ export default function Folder({ folder }) {
             className="text-truncate w-100" 
             as={Link}
         >
+                <Image className="mr-2" src={folderIcon} />
                 <strong>{folder.name}</strong>
         </Button>
     )
